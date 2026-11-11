@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgendaMed | Agendamento de Consultas</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="auth-screen" class="auth-screen">
+    <div class="auth-brand"><div class="brand-icon">+</div><div><strong>AgendaMed</strong><span>Agendamento de consultas</span></div></div>
+    <div class="auth-card">
+      <div id="auth-login" class="auth-panel">
+        <span class="hero-tag">BEM-VINDO</span><h1>Entre na sua conta</h1><p class="auth-subtitle">Acesse suas consultas e agende um atendimento.</p>
+        <form id="login-form" class="form-grid one-col">
+          <div class="field"><label>E-mail</label><input class="form-input" type="email" name="email" required></div>
+          <div class="field"><label>Senha</label><input class="form-input" type="password" name="senha" required></div>
+          <button class="primary-btn full-btn" type="submit">Entrar</button>
+        </form>
+        <div class="auth-links"><button type="button" class="link-btn" data-auth="register">Criar conta</button><button type="button" class="link-btn" data-auth="reset">Esqueci minha senha</button></div>
+        <div class="demo-box"><b>Acesso administrativo inicial</b><span>E-mail: admin@agendamed.com</span><span>Senha: admin123</span></div>
+      </div>
+      <div id="auth-register" class="auth-panel hidden">
+        <span class="hero-tag">NOVO PACIENTE</span><h1>Crie sua conta</h1><p class="auth-subtitle">Precisamos de alguns dados pessoais para seu cadastro.</p>
+        <form id="register-form" class="form-grid">
+          <div class="field full"><label>Nome completo</label><input class="form-input" name="nome" required maxlength="100"></div>
+          <div class="field"><label>CPF</label><input class="form-input" name="cpf" placeholder="000.000.000-00" required></div>
+          <div class="field"><label>Data de nascimento</label><input class="form-input" type="date" name="dataNascimento" required></div>
+          <div class="field"><label>Telefone</label><input class="form-input" name="telefone" required></div>
+          <div class="field"><label>E-mail</label><input class="form-input" type="email" name="email" required></div>
+          <div class="field full"><label>Endereço</label><input class="form-input" name="endereco" placeholder="Rua, número, bairro, cidade" required maxlength="200"></div>
+          <div class="field"><label>Senha</label><input class="form-input" type="password" name="senha" minlength="8" autocomplete="new-password" required></div>
+          <div class="field"><label>Confirmar senha</label><input class="form-input" type="password" name="confirmarSenha" minlength="8" autocomplete="new-password" required></div>
+          <p class="help-text full">A senha deve ter no mínimo 8 caracteres, incluindo letra maiúscula, letra minúscula, número e caractere especial (ex.: !, @ ou #).</p>
+          <button class="primary-btn full-btn full" type="submit">Criar minha conta</button>
+        </form>
+        <button type="button" class="back-auth" data-auth="login">← Voltar para o login</button>
+      </div>
+      <div id="auth-reset" class="auth-panel hidden">
+        <span class="hero-tag">RECUPERAÇÃO</span><h1>Redefinir senha</h1><p class="auth-subtitle">Informe o e-mail e o CPF cadastrados para validar a conta e escolher uma nova senha.</p>
+        <form id="reset-form" class="form-grid one-col">
+          <div class="field"><label>E-mail de recuperação</label><input class="form-input" type="email" name="email" required></div>
+          <div class="field"><label>CPF cadastrado</label><input class="form-input" name="cpf" placeholder="000.000.000-00" required></div>
+          <div class="field"><label>Nova senha</label><input class="form-input" type="password" name="novaSenha" minlength="8" autocomplete="new-password" required></div>
+          <div class="field"><label>Confirmar nova senha</label><input class="form-input" type="password" name="confirmarSenha" minlength="8" autocomplete="new-password" required></div>
+          <p class="help-text">Use pelo menos 8 caracteres, com letra maiúscula, minúscula, número e caractere especial.</p>
+          <button class="primary-btn full-btn" type="submit">Redefinir senha</button>
+        </form>
+        <button type="button" class="back-auth" data-auth="login">← Voltar para o login</button>
+      </div>
+      <div id="auth-message" class="auth-message" role="alert"></div>
+    </div>
+  </div>
+
+  <div id="app-screen" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-icon">+</div><div><strong>AgendaMed</strong><span>Agendamento de consultas</span></div></div>
+      <nav class="nav-menu">
+        <button class="nav-item active" data-section="dashboard"><span>⌂</span> Início</button>
+        <button class="nav-item" data-section="consultas"><span>▣</span> Consultas</button>
+        <button class="nav-item" data-section="pacientes"><span>♙</span> Paciente</button>
+        <button class="nav-item admin-only" data-section="medicos"><span>⚕</span> Médicos</button>
+      </nav>
+      <div class="sidebar-footer"><span class="status-dot"></span> API conectada</div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar"><div><p class="eyebrow">SISTEMA DE AGENDAMENTO</p><h1 id="page-title">Visão geral</h1></div><div class="topbar-actions"><span id="user-chip" class="user-chip"></span><button class="secondary-btn" id="logout-btn">Sair</button></div></header>
+      <div id="toast" class="toast" role="alert"></div>
+      <section id="dashboard" class="page-section active-section">
+        <div class="hero-card"><div><span class="hero-tag">AGENDA MÉDICA</span><h2 id="welcome-title">Organize seus atendimentos em um só lugar.</h2><p id="welcome-text">Cadastre-se, escolha um médico e acompanhe suas consultas.</p></div><div class="hero-symbol">⚕</div></div>
+        <div class="stats-grid"><div class="stat-card"><span class="stat-icon blue">▣</span><div><small>Consultas</small><strong id="stat-consultas">0</strong></div></div><div class="stat-card"><span class="stat-icon purple">⚕</span><div><small>Médicos</small><strong id="stat-medicos">0</strong></div></div><div class="stat-card"><span class="stat-icon orange">◷</span><div><small>Agendadas</small><strong id="stat-agendadas">0</strong></div></div></div>
+        <div class="content-grid"><div class="panel"><div class="panel-header"><div><h3>Próximas consultas</h3><p>Seus atendimentos agendados</p></div><button class="text-btn" data-go="consultas">Ver todas →</button></div><div id="dashboard-consultas" class="appointment-list"></div></div><div class="panel info-panel"><div class="panel-header"><div><h3>Conta</h3><p id="account-help">Acompanhe seus dados e consultas.</p></div></div><div class="account-summary" id="account-summary"></div></div></div>
+      </section>
+      <section id="medicos" class="page-section"><div class="section-heading"><div><p>Apenas o administrador pode cadastrar, editar ou remover profissionais.</p></div><button class="primary-btn" id="new-medico">+ Novo médico</button></div><div class="toolbar"><input id="medico-search" class="search-input" placeholder="Pesquisar por nome..."><button class="secondary-btn" id="search-medico">Pesquisar</button></div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Nome</th><th>CRM</th><th>Especialidade</th><th>E-mail</th><th>Ações</th></tr></thead><tbody id="medicos-table"></tbody></table></div></div></section>
+      <section id="pacientes" class="page-section"><div class="section-heading"><div><h2>Meu cadastro</h2><p>Seus dados pessoais cadastrados no sistema.</p></div></div><div class="panel" id="paciente-profile"></div></section>
+      <section id="consultas" class="page-section"><div class="section-heading"><div><h2>Consultas</h2><p>Agende e acompanhe seus atendimentos.</p></div><button class="primary-btn" id="new-consulta">+ Nova consulta</button></div><div class="filter-row"><select id="consulta-filter"><option value="TODAS">Todas</option><option value="AGENDADA">Agendadas</option><option value="REALIZADA">Realizadas</option><option value="CANCELADA">Canceladas</option><option value="CANCELADA_TARDIA">Canceladas tardiamente</option></select><button class="secondary-btn" id="filter-consultas">Filtrar</button></div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Data e hora</th><th>Paciente</th><th>Médico</th><th>Status</th><th>Observação</th><th>Ações</th></tr></thead><tbody id="consultas-table"></tbody></table></div></div></section>
+    </main>
+  </div>
+  <div id="modal-backdrop" class="modal-backdrop hidden"><div class="modal" role="dialog" aria-modal="true"><div class="modal-header"><div><span class="eyebrow" id="modal-eyebrow">CADASTRO</span><h2 id="modal-title">Novo cadastro</h2></div><button class="close-btn" id="close-modal">×</button></div><div id="modal-body"></div></div></div>
+  <script src="/app.js"></script>
+</body>
+</html>
